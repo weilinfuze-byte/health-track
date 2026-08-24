@@ -118,6 +118,13 @@
       padding: 6px 10px; border-radius: 999px; border: 1px solid #b2ddff; background: #eff8ff;
     }
 
+    .chart-card h3 { margin-bottom: 4px; }
+    .chart-wrap { width: 100%; overflow: hidden; margin-top: 8px; }
+    .chart-wrap svg { width: 100%; height: auto; display: block; }
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-size: 11px; color: var(--muted); }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+
   </style>
 </head>
 <body>
@@ -129,12 +136,14 @@
     </p>
 
     <div class="toc">
+      <a href="#charts">折线图</a>
       <a href="#findings">关键发现</a>
       <a href="#nitrogen">氮负荷</a>
       <a href="#fatigue">疲劳分</a>
       <a href="#si">表间隔</a>
       <a href="#half">半程对比</a>
       <a href="#grades">双评分</a>
+      <a href="#more">还能挖</a>
     </div>
 
     <section class="stats">
@@ -142,6 +151,46 @@
       <div class="stat"><div class="v">9,369</div><div class="l">深度·分钟合计</div></div>
       <div class="stat warn"><div class="v">8/22</div><div class="l">综合压力最高日</div></div>
       <div class="stat good"><div class="v">77 min</div><div class="l">平均表间隔</div></div>
+    </section>
+
+    
+    <section class="section" id="charts">
+      <h2>走势折线图</h2>
+
+      <div class="card chart-card">
+        <h3>每日最大深度（m）</h3>
+        <p class="note" style="margin-top:0">中点尖峰是 8/19 的 46.3 m；后半仍偏深，不是「深完就浅」。</p>
+        <div class="chart-wrap"><svg viewBox="0 0 420 180" role="img"><line x1="36" y1="152.0" x2="408" y2="152.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="155.5" text-anchor="end" font-size="10" fill="#98a2b3">20</text><line x1="36" y1="106.7" x2="408" y2="106.7" stroke="#eef2f6" stroke-width="1"/><text x="30" y="110.2" text-anchor="end" font-size="10" fill="#98a2b3">30</text><line x1="36" y1="61.3" x2="408" y2="61.3" stroke="#eef2f6" stroke-width="1"/><text x="30" y="64.8" text-anchor="end" font-size="10" fill="#98a2b3">40</text><line x1="36" y1="16.0" x2="408" y2="16.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="19.5" text-anchor="end" font-size="10" fill="#98a2b3">50</text><text x="36.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text><text x="98.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text><text x="160.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text><text x="222.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text><text x="284.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text><text x="346.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text><text x="408.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text><line x1="36" y1="152" x2="408" y2="152" stroke="#e5e7eb" stroke-width="1"/><polygon fill="#2f80ed" opacity="0.12" points="36.0,108.5 98.0,96.7 160.0,98.1 222.0,32.8 284.0,72.7 346.0,95.8 408.0,65.0 408.0,152.0 36.0,152.0"/><polyline fill="none" stroke="#2f80ed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36.0,108.5 98.0,96.7 160.0,98.1 222.0,32.8 284.0,72.7 346.0,95.8 408.0,65.0"/><circle cx="36.0" cy="108.5" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="98.0" cy="96.7" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="160.0" cy="98.1" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="222.0" cy="32.8" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="284.0" cy="72.7" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="346.0" cy="95.8" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/><circle cx="408.0" cy="65.0" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/></svg></div>
+      </div>
+
+      <div class="card chart-card">
+        <h3>氮负荷代理 · 深度·分钟</h3>
+        <p class="note" style="margin-top:0">最高在 8/21–22，不在最深那天——累积暴露比单次峰值更吃人。</p>
+        <div class="chart-wrap"><svg viewBox="0 0 420 180" role="img"><line x1="36" y1="152.0" x2="408" y2="152.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="155.5" text-anchor="end" font-size="10" fill="#98a2b3">900</text><line x1="36" y1="93.7" x2="408" y2="93.7" stroke="#eef2f6" stroke-width="1"/><text x="30" y="97.2" text-anchor="end" font-size="10" fill="#98a2b3">1200</text><line x1="36" y1="35.4" x2="408" y2="35.4" stroke="#eef2f6" stroke-width="1"/><text x="30" y="38.9" text-anchor="end" font-size="10" fill="#98a2b3">1500</text><text x="36.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text><text x="98.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text><text x="160.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text><text x="222.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text><text x="284.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text><text x="346.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text><text x="408.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text><line x1="36" y1="152" x2="408" y2="152" stroke="#e5e7eb" stroke-width="1"/><polygon fill="#f79009" opacity="0.12" points="36.0,82.6 98.0,65.2 160.0,58.0 222.0,55.8 284.0,133.3 346.0,32.3 408.0,40.3 408.0,152.0 36.0,152.0"/><polyline fill="none" stroke="#f79009" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36.0,82.6 98.0,65.2 160.0,58.0 222.0,55.8 284.0,133.3 346.0,32.3 408.0,40.3"/><circle cx="36.0" cy="82.6" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="98.0" cy="65.2" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="160.0" cy="58.0" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="222.0" cy="55.8" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="284.0" cy="133.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="346.0" cy="32.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="408.0" cy="40.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/></svg></div>
+      </div>
+
+      <div class="card chart-card">
+        <h3>日均心率（bpm）</h3>
+        <p class="note" style="margin-top:0">前六天在 97–106 晃；8/22 拉到 111，是执行层疲劳信号。</p>
+        <div class="chart-wrap"><svg viewBox="0 0 420 180" role="img"><line x1="36" y1="152.0" x2="408" y2="152.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="155.5" text-anchor="end" font-size="10" fill="#98a2b3">90</text><line x1="36" y1="97.6" x2="408" y2="97.6" stroke="#eef2f6" stroke-width="1"/><text x="30" y="101.1" text-anchor="end" font-size="10" fill="#98a2b3">100</text><line x1="36" y1="43.2" x2="408" y2="43.2" stroke="#eef2f6" stroke-width="1"/><text x="30" y="46.7" text-anchor="end" font-size="10" fill="#98a2b3">110</text><text x="36.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text><text x="98.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text><text x="160.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text><text x="222.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text><text x="284.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text><text x="346.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text><text x="408.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text><line x1="36" y1="152" x2="408" y2="152" stroke="#e5e7eb" stroke-width="1"/><polygon fill="#2e90fa" opacity="0.12" points="36.0,113.9 98.0,65.0 160.0,103.0 222.0,70.4 284.0,97.6 346.0,97.6 408.0,37.8 408.0,152.0 36.0,152.0"/><polyline fill="none" stroke="#2e90fa" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36.0,113.9 98.0,65.0 160.0,103.0 222.0,70.4 284.0,97.6 346.0,97.6 408.0,37.8"/><circle cx="36.0" cy="113.9" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="98.0" cy="65.0" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="160.0" cy="103.0" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="222.0" cy="70.4" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="284.0" cy="97.6" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="346.0" cy="97.6" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/><circle cx="408.0" cy="37.8" r="3.2" fill="#fff" stroke="#2e90fa" stroke-width="2"/></svg></div>
+      </div>
+
+      <div class="card chart-card">
+        <h3>开潜 / 收盘 Body Resources（%）</h3>
+        <div class="chart-wrap"><svg viewBox="0 0 420 180" role="img"><line x1="36" y1="152.0" x2="408" y2="152.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="155.5" text-anchor="end" font-size="10" fill="#98a2b3">0</text><line x1="36" y1="106.7" x2="408" y2="106.7" stroke="#eef2f6" stroke-width="1"/><text x="30" y="110.2" text-anchor="end" font-size="10" fill="#98a2b3">30</text><line x1="36" y1="61.3" x2="408" y2="61.3" stroke="#eef2f6" stroke-width="1"/><text x="30" y="64.8" text-anchor="end" font-size="10" fill="#98a2b3">60</text><line x1="36" y1="16.0" x2="408" y2="16.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="19.5" text-anchor="end" font-size="10" fill="#98a2b3">90</text><text x="36.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text><text x="98.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text><text x="160.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text><text x="222.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text><text x="284.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text><text x="346.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text><text x="408.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text><line x1="36" y1="152" x2="408" y2="152" stroke="#e5e7eb" stroke-width="1"/><polyline fill="none" stroke="#12b76a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36.0,49.2 98.0,32.6 160.0,40.2 222.0,76.4 284.0,70.4 346.0,44.7 408.0,64.4"/><circle cx="36.0" cy="49.2" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="98.0" cy="32.6" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="160.0" cy="40.2" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="222.0" cy="76.4" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="284.0" cy="70.4" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="346.0" cy="44.7" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><circle cx="408.0" cy="64.4" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/><polyline fill="none" stroke="#f79009" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 4" points="36.0,97.6 98.0,88.5 160.0,74.9 222.0,112.7 284.0,65.9 346.0,136.9 408.0,106.7"/><circle cx="36.0" cy="97.6" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="98.0" cy="88.5" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="160.0" cy="74.9" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="222.0" cy="112.7" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="284.0" cy="65.9" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="346.0" cy="136.9" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/><circle cx="408.0" cy="106.7" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/></svg></div>
+        <div class="legend">
+          <span><i style="background:#12b76a"></i>开潜</span>
+          <span><i style="background:#f79009"></i>收盘（虚线）</span>
+        </div>
+        <p class="note">8/21 收盘掉到 10%（潜后徒步）；次日开潜只回 58%，后面心率也抬高。</p>
+      </div>
+
+      <div class="card chart-card">
+        <h3>前夜睡眠 HRV</h3>
+        <p class="note" style="margin-top:0">对应次日开潜日（8/16–8/21）。谷底 27 出现在 8/19 深潜前夜。</p>
+        <div class="chart-wrap"><svg viewBox="0 0 420 180" role="img"><line x1="36" y1="152.0" x2="408" y2="152.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="155.5" text-anchor="end" font-size="10" fill="#98a2b3">20</text><line x1="36" y1="118.0" x2="408" y2="118.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="121.5" text-anchor="end" font-size="10" fill="#98a2b3">30</text><line x1="36" y1="84.0" x2="408" y2="84.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="87.5" text-anchor="end" font-size="10" fill="#98a2b3">40</text><line x1="36" y1="50.0" x2="408" y2="50.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="53.5" text-anchor="end" font-size="10" fill="#98a2b3">50</text><line x1="36" y1="16.0" x2="408" y2="16.0" stroke="#eef2f6" stroke-width="1"/><text x="30" y="19.5" text-anchor="end" font-size="10" fill="#98a2b3">60</text><text x="36.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text><text x="98.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text><text x="160.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text><text x="222.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text><text x="284.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text><text x="346.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text><text x="408.0" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text><line x1="36" y1="152" x2="408" y2="152" stroke="#e5e7eb" stroke-width="1"/><polyline fill="none" stroke="#7a5af8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36.0,36.4 98.0,73.8 160.0,84.0 222.0,128.2 284.0,97.6 346.0,80.6"/><circle cx="36.0" cy="36.4" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/><circle cx="98.0" cy="73.8" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/><circle cx="160.0" cy="84.0" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/><circle cx="222.0" cy="128.2" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/><circle cx="284.0" cy="97.6" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/><circle cx="346.0" cy="80.6" r="3.2" fill="#fff" stroke="#7a5af8" stroke-width="2"/></svg></div>
+        <p class="note">前夜 HRV（对应次日开潜）；8/22 前夜未并入本图</p>
+      </div>
     </section>
 
     <section class="section" id="findings">
@@ -295,6 +344,19 @@
           扣分：5/7 天最深在最后；HRV 谷底次日仍做 46 m；8/21 潜后徒步把资源打到 10% 后次日继续三潜。
           加分：表间隔整体合格；8/20 前两潜有收浅；行程结束后有一晚高质量补眠（8.9 h / 81 分）。
         </p>
+      </div>
+    </section>
+
+    
+    <section class="section" id="more">
+      <h2>还能继续挖的方向</h2>
+      <div class="card">
+        <p class="find" style="margin-bottom:10px"><strong>逐潜深度剖面</strong>：每潜 max/avg 深度连成 21 点折线，看「越潜越深」是否成习惯。</p>
+        <p class="find" style="margin-bottom:10px"><strong>表间隔折线</strong>：14 次 SI 的分钟走势，标出 &lt;60 的点。</p>
+        <p class="find" style="margin-bottom:10px"><strong>TSS / 能量累积</strong>：潜水 TSS 日累计曲线，叠徒步那天的陆上负荷。</p>
+        <p class="find" style="margin-bottom:10px"><strong>睡眠质量分 × 次日深度</strong>：看「睡差还敢推深」有没有重复。</p>
+        <p class="find" style="margin-bottom:10px"><strong>水温 / 水平距离</strong>：若详情里稳定有字段，可看冷水或长游是否推高心率。</p>
+        <p class="find"><strong>与下次行程对比</strong>：同一套折线模板，下次直接叠图比进步。</p>
       </div>
     </section>
 
