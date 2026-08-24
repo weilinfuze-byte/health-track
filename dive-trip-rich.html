@@ -3,22 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0b3d4a" />
+  <meta name="theme-color" content="#f4f7fb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>7天潜水深度分析 · 8/16–8/22</title>
   <style>
+
     :root {
-      --bg: #071820;
-      --bg2: #0b3d4a;
-      --card: #102833;
-      --card2: #143542;
-      --line: rgba(255,255,255,0.08);
-      --text: #eef6f8;
-      --muted: #8eacb6;
-      --accent: #2ec4b6;
-      --warn: #f0a202;
-      --good: #3ddc97;
-      --soft: #1a4a58;
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --card2: #f8fafc;
+      --line: #e5e7eb;
+      --text: #172033;
+      --muted: #667085;
+      --accent: #2f80ed;
+      --warn: #f79009;
+      --good: #12b76a;
+      --soft: #eef4ff;
+      --shadow: 0 10px 30px rgba(16, 24, 40, 0.06);
       --radius: 16px;
       --pad: 16px;
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", sans-serif;
@@ -28,9 +29,8 @@
       margin: 0;
       color: var(--text);
       background:
-        radial-gradient(ellipse at 20% -10%, rgba(46,196,182,0.18), transparent 40%),
-        radial-gradient(ellipse at 100% 10%, rgba(240,162,2,0.1), transparent 35%),
-        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 28%, var(--bg) 100%);
+        radial-gradient(circle at 10% -10%, rgba(47, 128, 237, 0.12), transparent 28rem),
+        var(--bg);
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
@@ -49,44 +49,75 @@
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: var(--radius);
+      box-shadow: var(--shadow);
       padding: 14px;
       margin-bottom: 10px;
     }
-    .card.hot { border-color: rgba(240,162,2,0.4); background: linear-gradient(180deg, #2a2410 0%, var(--card) 55%); }
-    .card.good { border-color: rgba(61,220,151,0.28); }
+    .card.hot {
+      border-color: #fedf89;
+      background: linear-gradient(180deg, #fffaf0 0%, #ffffff 55%);
+    }
+    .card.good {
+      border-color: #abefc6;
+      background: linear-gradient(180deg, #f3faf6 0%, #ffffff 55%);
+    }
     .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
-    .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
     .stat .v { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
     .stat .l { margin-top: 6px; font-size: 12px; color: var(--muted); }
     .stat.warn .v { color: var(--warn); }
     .stat.accent .v { color: var(--accent); }
     .stat.good .v { color: var(--good); }
     .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
-    .pill { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); }
-    .pill.ok { color: var(--good); }
-    .pill.warn { color: var(--warn); }
-    .bar-row { display: grid; grid-template-columns: 52px 1fr 44px; gap: 8px; align-items: center; margin-top: 8px; font-size: 12px; color: var(--muted); }
-    .bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
-    .bar > i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #1f8a7c, var(--accent)); }
-    .bar.warn > i { background: linear-gradient(90deg, #8a6a1a, var(--warn)); }
-    .bar.hr > i { background: linear-gradient(90deg, #2a6f8f, #7ec8e3); }
+    .pill {
+      font-size: 12px; padding: 6px 10px; border-radius: 999px;
+      background: var(--soft); border: 1px solid #dbe7ff; color: var(--text);
+    }
+    .pill.ok { color: #067647; background: #dcfae6; border-color: #abefc6; }
+    .pill.warn { color: #b54708; background: #fef0c7; border-color: #fedf89; }
+    .bar-row {
+      display: grid; grid-template-columns: 52px 1fr 44px; gap: 8px;
+      align-items: center; margin-top: 8px; font-size: 12px; color: var(--muted);
+    }
+    .bar { height: 8px; background: #eef2f6; border-radius: 99px; overflow: hidden; }
+    .bar > i {
+      display: block; height: 100%; border-radius: 99px;
+      background: linear-gradient(90deg, #53b1fd, var(--accent));
+    }
+    .bar.warn > i { background: linear-gradient(90deg, #fdb022, var(--warn)); }
+    .bar.hr > i { background: linear-gradient(90deg, #7cd4fd, #2e90fa); }
     .note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 2px 0; }
     .find { font-size: 13px; line-height: 1.65; color: var(--muted); margin: 0; }
     .find strong { color: var(--text); font-weight: 650; }
     .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
-    .kv div { background: var(--card2); border-radius: 12px; padding: 10px; }
+    .kv div {
+      background: var(--card2); border-radius: 12px; padding: 10px; border: 1px solid var(--line);
+    }
     .kv .k { font-size: 11px; color: var(--muted); }
     .kv .val { margin-top: 4px; font-size: 15px; font-weight: 700; }
-    .rank { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px; }
+    .rank {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px;
+    }
     .rank:first-child { border-top: 0; padding-top: 2px; }
     .rank .n { color: var(--muted); width: 22px; }
     .rank .s { color: var(--warn); font-weight: 700; }
-    .footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .footer {
+      margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line);
+      color: var(--muted); font-size: 11px; line-height: 1.6;
+    }
     .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
     .toc a {
       color: var(--accent); text-decoration: none; font-size: 12px;
-      padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(46,196,182,0.35); background: rgba(46,196,182,0.08);
+      padding: 6px 10px; border-radius: 999px; border: 1px solid #b2ddff; background: #eff8ff;
     }
+
   </style>
 </head>
 <body>
@@ -279,7 +310,7 @@
     </section>
 
     <p class="note">
-      <a href="https://weilinfuze-byte.github.io/health-track/dive-trip.html" style="color:var(--accent)">返回基础复盘页</a>
+      <a href="https://weilinfuze-byte.github.io/health-track/dive-trip.html" style="color:#2f80ed">返回基础复盘页</a>
     </p>
 
     <footer class="footer">
