@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b3d4a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>7天潜水深度分析 · 8/16–8/22</title>
+  <style>
+    :root {
+      --bg: #071820;
+      --bg2: #0b3d4a;
+      --card: #102833;
+      --card2: #143542;
+      --line: rgba(255,255,255,0.08);
+      --text: #eef6f8;
+      --muted: #8eacb6;
+      --accent: #2ec4b6;
+      --warn: #f0a202;
+      --good: #3ddc97;
+      --soft: #1a4a58;
+      --radius: 16px;
+      --pad: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 20% -10%, rgba(46,196,182,0.18), transparent 40%),
+        radial-gradient(ellipse at 100% 10%, rgba(240,162,2,0.1), transparent 35%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 28%, var(--bg) 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      width: min(480px, 100%);
+      margin: 0 auto;
+      padding: calc(12px + env(safe-area-inset-top)) var(--pad) calc(40px + env(safe-area-inset-bottom));
+    }
+    .eyebrow { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; margin: 0 0 8px; }
+    h1 { margin: 0; font-size: 26px; line-height: 1.15; letter-spacing: -0.03em; }
+    h2 { margin: 0 0 12px; font-size: 18px; letter-spacing: -0.02em; }
+    h3 { margin: 0 0 8px; font-size: 14px; color: var(--accent); }
+    .lead { margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .section { margin: 24px 0 8px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .card.hot { border-color: rgba(240,162,2,0.4); background: linear-gradient(180deg, #2a2410 0%, var(--card) 55%); }
+    .card.good { border-color: rgba(61,220,151,0.28); }
+    .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 16px 0; }
+    .stat { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+    .stat .v { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
+    .stat .l { margin-top: 6px; font-size: 12px; color: var(--muted); }
+    .stat.warn .v { color: var(--warn); }
+    .stat.accent .v { color: var(--accent); }
+    .stat.good .v { color: var(--good); }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 8px; }
+    .pill { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: var(--soft); border: 1px solid var(--line); }
+    .pill.ok { color: var(--good); }
+    .pill.warn { color: var(--warn); }
+    .bar-row { display: grid; grid-template-columns: 52px 1fr 44px; gap: 8px; align-items: center; margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .bar { height: 8px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+    .bar > i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #1f8a7c, var(--accent)); }
+    .bar.warn > i { background: linear-gradient(90deg, #8a6a1a, var(--warn)); }
+    .bar.hr > i { background: linear-gradient(90deg, #2a6f8f, #7ec8e3); }
+    .note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 2px 0; }
+    .find { font-size: 13px; line-height: 1.65; color: var(--muted); margin: 0; }
+    .find strong { color: var(--text); font-weight: 650; }
+    .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .kv div { background: var(--card2); border-radius: 12px; padding: 10px; }
+    .kv .k { font-size: 11px; color: var(--muted); }
+    .kv .val { margin-top: 4px; font-size: 15px; font-weight: 700; }
+    .rank { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); font-size: 13px; }
+    .rank:first-child { border-top: 0; padding-top: 2px; }
+    .rank .n { color: var(--muted); width: 22px; }
+    .rank .s { color: var(--warn); font-weight: 700; }
+    .footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+    .toc a {
+      color: var(--accent); text-decoration: none; font-size: 12px;
+      padding: 6px 10px; border-radius: 999px; border: 1px solid rgba(46,196,182,0.35); background: rgba(46,196,182,0.08);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">RICH ANALYSIS · 21 DIVES</p>
+    <h1>7 天潜水深度分析</h1>
+    <p class="lead">
+      在原有复盘之上，补了氮负荷代理、表间隔质量、疲劳综合分、半程对比，以及「水下执行 vs 恢复管理」两套评分。
+    </p>
+
+    <div class="toc">
+      <a href="#findings">关键发现</a>
+      <a href="#nitrogen">氮负荷</a>
+      <a href="#fatigue">疲劳分</a>
+      <a href="#si">表间隔</a>
+      <a href="#half">半程对比</a>
+      <a href="#grades">双评分</a>
+    </div>
+
+    <section class="stats">
+      <div class="stat accent"><div class="v">21</div><div class="l">有效潜次</div></div>
+      <div class="stat"><div class="v">9,369</div><div class="l">深度·分钟合计</div></div>
+      <div class="stat warn"><div class="v">8/22</div><div class="l">综合压力最高日</div></div>
+      <div class="stat good"><div class="v">77 min</div><div class="l">平均表间隔</div></div>
+    </section>
+
+    <section class="section" id="findings">
+      <h2>五个更深入的发现</h2>
+
+      <div class="card hot">
+        <h3>1. 最累的一天不是最深那天</h3>
+        <p class="find">
+          综合压力分（深度暴露 + 开潜资源不足 + 心率抬升）：
+          <strong>8/22（119）> 8/19（109）> 8/21（98）</strong>。
+          8/19 最深到 46.3 m，但当天均心率仍约 105；8/22 最深只有 39.2 m，均心率却抬到 <strong>111</strong>，说明疲劳已经进到执行层。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>2. 「深度·分钟」比单纯最大深度更能说明负荷</h3>
+        <p class="find">
+          用平均深度 × 水下分钟做氮暴露代理。日合计最高是 <strong>8/21（1,516）</strong>，其次 8/22（1,475），而不是 8/19（1,395）。
+          8/19 的特点是<strong>单潜峰值</strong>最高（46.3 m × 34.6 min ≈ 1,602），短而尖；后两天是<strong>全天铺开</strong>的累积暴露。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>3. 表间隔其实不差，真正的短板是潜序</h3>
+        <p class="find">
+          14 次表间隔均值 <strong>77 分钟</strong>，只有 8/16 D1→D2 低于 60（53 分钟）。
+          但 7 天里有 <strong>5 天最深潜在最后</strong>；8/20 甚至是 15→13→37.5 m 的经典反向剖面。表间隔够，潜序仍偏激进。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>4. 睡眠 HRV 是比主观感觉更早的预警</h3>
+        <p class="find">
+          8/18 夜 HRV 掉到 <strong>27</strong>，次日开潜资源只有 50%，然后出现全程最深潜。
+          主观感觉最差其实在前一天（8/18 感觉 1–2）。链路是：
+          <strong>主观下滑 → HRV 谷底 → 深潜日资源不足</strong>。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>5. 水下技术稳住了，系统恢复没有</h3>
+        <p class="find">
+          前半程（8/16–18）与后半程（8/20–22）的水下分钟、深度·分钟几乎一样（约 323 vs 304 分钟；3,988 vs 3,986）。
+          差别在心率（101 → 104，且 8/22 拉到 111）和收盘资源（后半出现 10%）。
+          <strong>量没变多，身体却更贵</strong>。
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="nitrogen">
+      <h2>氮负荷代理（深度·分钟）</h2>
+      <div class="card">
+        <div class="bar-row"><span>8/16</span><div class="bar"><i style="width:83%"></i></div><span>1257</span></div>
+        <div class="bar-row"><span>8/17</span><div class="bar"><i style="width:89%"></i></div><span>1347</span></div>
+        <div class="bar-row"><span>8/18</span><div class="bar"><i style="width:91%"></i></div><span>1384</span></div>
+        <div class="bar-row"><span>8/19</span><div class="bar"><i style="width:92%"></i></div><span>1395</span></div>
+        <div class="bar-row"><span>8/20</span><div class="bar"><i style="width:66%"></i></div><span>996</span></div>
+        <div class="bar-row"><span>8/21</span><div class="bar warn"><i style="width:100%"></i></div><span>1516</span></div>
+        <div class="bar-row"><span>8/22</span><div class="bar warn"><i style="width:97%"></i></div><span>1475</span></div>
+        <p class="note">公式：Σ(平均深度 × 水下分钟)。不是减压电脑算法，只用于天与天比较。全程合计约 9,369。</p>
+      </div>
+      <div class="card">
+        <h3>反向剖面日历</h3>
+        <div class="kv">
+          <div><div class="k">最深在 D3</div><div class="val">5 / 7 天</div></div>
+          <div><div class="k">最深在 D2</div><div class="val">2 / 7 天</div></div>
+        </div>
+        <p class="note">8/18、8/22 最深在第二潜；其余五天都是第三潜最深。8/20：15.4 → 12.7 → 37.5 m，落差最大。</p>
+      </div>
+    </section>
+
+    <section class="section" id="fatigue">
+      <h2>综合压力日排行</h2>
+      <div class="card">
+        <p class="note" style="margin-top:0">分数越高越吃紧 = 深度暴露 + 开潜资源低 + 均心率抬升</p>
+        <div class="rank"><span class="n">1</span><span>8/22 最后一天</span><span class="s">119</span></div>
+        <div class="rank"><span class="n">2</span><span>8/19 最深日</span><span class="s">109</span></div>
+        <div class="rank"><span class="n">3</span><span>8/21 潜+徒步</span><span class="s">98</span></div>
+        <div class="rank"><span class="n">4</span><span>8/17</span><span class="s">95</span></div>
+        <div class="rank"><span class="n">5</span><span>8/18</span><span class="s">88</span></div>
+        <div class="rank"><span class="n">6</span><span>8/16</span><span class="s">82</span></div>
+        <div class="rank"><span class="n">7</span><span>8/20 相对轻松</span><span class="s">80</span></div>
+      </div>
+
+      <div class="card">
+        <h3>日均心率走势</h3>
+        <div class="bar-row"><span>8/16</span><div class="bar hr"><i style="width:87%"></i></div><span>97</span></div>
+        <div class="bar-row"><span>8/17</span><div class="bar hr"><i style="width:96%"></i></div><span>106</span></div>
+        <div class="bar-row"><span>8/18</span><div class="bar hr"><i style="width:89%"></i></div><span>99</span></div>
+        <div class="bar-row"><span>8/19</span><div class="bar hr"><i style="width:94%"></i></div><span>105</span></div>
+        <div class="bar-row"><span>8/20</span><div class="bar hr"><i style="width:90%"></i></div><span>100</span></div>
+        <div class="bar-row"><span>8/21</span><div class="bar hr"><i style="width:90%"></i></div><span>100</span></div>
+        <div class="bar-row"><span>8/22</span><div class="bar warn"><i style="width:100%"></i></div><span>111</span></div>
+        <p class="note">条宽相对 111 bpm。8/22 是唯一均心率破 110 的一天，和综合压力第 1 吻合。</p>
+      </div>
+    </section>
+
+    <section class="section" id="si">
+      <h2>表间隔质量</h2>
+      <div class="card good">
+        <div class="kv">
+          <div><div class="k">平均表间隔</div><div class="val">77 min</div></div>
+          <div><div class="k">&lt; 60 min</div><div class="val">1 / 14</div></div>
+          <div><div class="k">最短</div><div class="val">53 min</div></div>
+          <div><div class="k">最长</div><div class="val">100 min</div></div>
+        </div>
+        <p class="note">唯一短间隔：8/16 D1→D2。其余都 ≥63 分钟。所以「恢复不够」主要不是水面停太短，而是夜间睡眠/HRV 与潜序问题。</p>
+      </div>
+    </section>
+
+    <section class="section" id="half">
+      <h2>前半 vs 后半</h2>
+      <div class="card">
+        <div class="kv">
+          <div><div class="k">前半 8/16–18 水下</div><div class="val">323 min</div></div>
+          <div><div class="k">后半 8/20–22 水下</div><div class="val">304 min</div></div>
+          <div><div class="k">前半深度·分钟</div><div class="val">3,988</div></div>
+          <div><div class="k">后半深度·分钟</div><div class="val">3,986</div></div>
+          <div><div class="k">前半均心率</div><div class="val">101</div></div>
+          <div><div class="k">后半均心率</div><div class="val">104</div></div>
+          <div><div class="k">前半 TSS</div><div class="val">247</div></div>
+          <div><div class="k">后半 TSS</div><div class="val">230</div></div>
+        </div>
+        <p class="note">量几乎一样，后半心率更高、收盘资源更差。中间的 8/19 是深度尖峰（46.3 m），把行程切成「还能扛」和「开始贵」两段。</p>
+      </div>
+
+      <div class="card">
+        <h3>睡眠 HRV → 次日开潜资源</h3>
+        <div class="bar-row"><span>HRV54</span><div class="bar"><i style="width:86%"></i></div><span>68%</span></div>
+        <div class="bar-row"><span>HRV43</span><div class="bar"><i style="width:100%"></i></div><span>79%</span></div>
+        <div class="bar-row"><span>HRV40</span><div class="bar"><i style="width:94%"></i></div><span>74%</span></div>
+        <div class="bar-row"><span>HRV27</span><div class="bar warn"><i style="width:63%"></i></div><span>50%</span></div>
+        <div class="bar-row"><span>HRV36</span><div class="bar warn"><i style="width:68%"></i></div><span>54%</span></div>
+        <div class="bar-row"><span>HRV41</span><div class="bar"><i style="width:90%"></i></div><span>71%</span></div>
+        <p class="note">左列为前夜睡眠 HRV，右轴为次日开潜 Body Resources。HRV 27 对应开潜 50%，是全行程最差耦合。</p>
+      </div>
+    </section>
+
+    <section class="section" id="grades">
+      <h2>双评分</h2>
+      <div class="card good">
+        <h3>水下执行 · A-</h3>
+        <p class="find">
+          心率控制优秀，CNS/OTU 全程极低，GF 保守，没有把疲劳放大成慌乱游动。
+          扣分点：三次心率冲高（158 / 156 / 156）都出现在中后段深潜。
+        </p>
+      </div>
+      <div class="card hot">
+        <h3>恢复与规划 · C+</h3>
+        <p class="find">
+          扣分：5/7 天最深在最后；HRV 谷底次日仍做 46 m；8/21 潜后徒步把资源打到 10% 后次日继续三潜。
+          加分：表间隔整体合格；8/20 前两潜有收浅；行程结束后有一晚高质量补眠（8.9 h / 81 分）。
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>可执行的下次规则</h2>
+      <div class="card">
+        <p class="find" style="margin-bottom:10px"><strong>1.</strong> 最深潜固定为当日第一潜。</p>
+        <p class="find" style="margin-bottom:10px"><strong>2.</strong> 前夜睡眠 HRV &lt; 35 或开潜资源 &lt; 55%：深度上限收到 30 m 内。</p>
+        <p class="find" style="margin-bottom:10px"><strong>3.</strong> 当日最大深度 ≥ 40 m：当天禁止陆上高强度（徒步/力量长课）。</p>
+        <p class="find" style="margin-bottom:10px"><strong>4.</strong> 连潜第 4 天起，盯日均心率；若连续两天均心率 &gt; 108，主动减一潜或减深。</p>
+        <p class="find"><strong>5.</strong> 表间隔继续保持 ≥ 60 分钟（这次基本做到了）。</p>
+      </div>
+    </section>
+
+    <p class="note">
+      <a href="https://weilinfuze-byte.github.io/health-track/dive-trip.html" style="color:var(--accent)">返回基础复盘页</a>
+    </p>
+
+    <footer class="footer">
+      Source: Suunto Ocean · 21 有效潜 · 已剔除 2 m 异常记录<br>
+      「深度·分钟」与综合压力分为分析用代理指标，不是减压电脑输出。<br>
+      个人数据页，链接可被打开。非医疗或潜水安全认证意见。
+    </footer>
+  </div>
+</body>
+</html>
