@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b3d4a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>7天潜水行程 · 8/16–8/22</title>
+  <style>
+    :root {
+      --bg: #071820;
+      --bg2: #0b3d4a;
+      --card: #102833;
+      --card2: #143542;
+      --line: rgba(255,255,255,0.08);
+      --text: #eef6f8;
+      --muted: #8eacb6;
+      --accent: #2ec4b6;
+      --warn: #f0a202;
+      --good: #3ddc97;
+      --soft: #1a4a58;
+      --radius: 16px;
+      --pad: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 20% -10%, rgba(46,196,182,0.18), transparent 40%),
+        radial-gradient(ellipse at 100% 10%, rgba(240,162,2,0.08), transparent 35%),
+        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 28%, var(--bg) 100%);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: min(480px, 100%);
+      margin: 0 auto;
+      padding: calc(12px + env(safe-area-inset-top)) var(--pad) calc(40px + env(safe-area-inset-bottom));
+    }
+
+    .hero {
+      padding: 8px 2px 18px;
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      margin: 0 0 8px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+    }
+    .lead {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px 12px;
+    }
+    .stat .v {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .stat .l {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .stat.warn .v { color: var(--warn); }
+    .stat.good .v { color: var(--good); }
+    .stat.accent .v { color: var(--accent); }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 20px;
+    }
+    .pill {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .pill.ok { color: var(--good); }
+    .pill.warn { color: var(--warn); }
+
+    .section {
+      margin: 22px 0 8px;
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .card.highlight {
+      border-color: rgba(240,162,2,0.35);
+      background: linear-gradient(180deg, #1a3528 0%, var(--card) 60%);
+    }
+    .card.danger {
+      border-color: rgba(240,162,2,0.45);
+      background: linear-gradient(180deg, #2a2410 0%, var(--card) 55%);
+    }
+
+    .day-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .day-top h3 {
+      margin: 0;
+      font-size: 16px;
+    }
+    .day-top .max {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .meta div {
+      background: var(--card2);
+      border-radius: 12px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .meta .mv {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .meta .ml {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 42px 1fr 36px;
+      gap: 8px;
+      align-items: center;
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .bar {
+      height: 8px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .bar > i {
+      display: block;
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, #1f8a7c, var(--accent));
+    }
+    .bar.open > i { background: linear-gradient(90deg, #2a6f8f, #5eb3d1); }
+    .bar.end > i { background: linear-gradient(90deg, #8a6a1a, var(--warn)); }
+
+    .dive {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+    }
+    .dive:first-child { border-top: 0; padding-top: 4px; }
+    .dive .tag {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .dive .main {
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .dive .main span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .dive .right {
+      text-align: right;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .dive .right small {
+      display: block;
+      margin-top: 2px;
+      font-weight: 500;
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .dive.hot .right { color: var(--warn); }
+
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 8px 2px 0;
+    }
+
+    .phase {
+      padding: 14px;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      margin-bottom: 10px;
+    }
+    .phase h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    .phase p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    details.day-card > summary {
+      list-style: none;
+      cursor: pointer;
+    }
+    details.day-card > summary::-webkit-details-marker { display: none; }
+    details.day-card[open] .chev::after { content: "收起"; }
+    .chev::after {
+      content: "展开潜次";
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .day-actions {
+      margin-top: 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <p class="eyebrow">SUUNTO · AIR · GF 40/85</p>
+      <h1>7 天潜水行程</h1>
+      <p class="lead">
+        8/16–8/22 连续连潜。水下执行稳、氧负荷低；中段恢复下滑，8/21 潜后徒步把资源打穿。已剔除 2 m 异常浅潜。
+      </p>
+    </header>
+
+    <section class="stats">
+      <div class="stat accent"><div class="v">21</div><div class="l">有效潜次</div></div>
+      <div class="stat"><div class="v">12.0h</div><div class="l">水下总时长</div></div>
+      <div class="stat warn"><div class="v">46.3m</div><div class="l">最大深度</div></div>
+      <div class="stat good"><div class="v">547</div><div class="l">潜水 TSS</div></div>
+    </section>
+
+    <div class="pills">
+      <span class="pill ok">心率大多 Zone 1</span>
+      <span class="pill ok">CNS ≤ 6%</span>
+      <span class="pill warn">常把最深放最后</span>
+      <span class="pill warn">8/21 徒步打穿恢复</span>
+    </div>
+
+    <section class="section">
+      <h2>行程三段</h2>
+      <div class="phase">
+        <h3>前半 · 8/16–18</h3>
+        <p>每天三潜，最深约 30–32 m。8/17 补觉后开潜资源 79%，全程最好。8/18 主观掉到 1–2。</p>
+      </div>
+      <div class="phase">
+        <h3>中点 · 8/19</h3>
+        <p>开潜资源约 50%，完成全程最深 46.3 m（Air）。心率仍轻松，但氮暴露与恢复储备最紧。</p>
+      </div>
+      <div class="phase">
+        <h3>后半 · 8/20–22</h3>
+        <p>前两潜有收浅，第三潜仍常最深。8/21 徒步后资源 10%。8/22 均心率抬到 115+。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>每日最大深度</h2>
+      <div class="card">
+        <div class="bar-row"><span>8/16</span><div class="bar"><i style="width:64%"></i></div><span>29.6</span></div>
+        <div class="bar-row"><span>8/17</span><div class="bar"><i style="width:70%"></i></div><span>32.2</span></div>
+        <div class="bar-row"><span>8/18</span><div class="bar"><i style="width:69%"></i></div><span>31.9</span></div>
+        <div class="bar-row"><span>8/19</span><div class="bar"><i style="width:100%"></i></div><span>46.3</span></div>
+        <div class="bar-row"><span>8/20</span><div class="bar"><i style="width:81%"></i></div><span>37.5</span></div>
+        <div class="bar-row"><span>8/21</span><div class="bar"><i style="width:70%"></i></div><span>32.4</span></div>
+        <div class="bar-row"><span>8/22</span><div class="bar"><i style="width:85%"></i></div><span>39.2</span></div>
+        <p class="note">条宽相对全程最深 46.3 m。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>开潜资源 vs 收盘</h2>
+      <div class="card">
+        <div class="bar-row"><span>8/16</span><div class="bar open"><i style="width:68%"></i></div><span>68%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:36%"></i></div><span>36%</span></div>
+        <div class="bar-row"><span>8/17</span><div class="bar open"><i style="width:79%"></i></div><span>79%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:42%"></i></div><span>42%</span></div>
+        <div class="bar-row"><span>8/18</span><div class="bar open"><i style="width:74%"></i></div><span>74%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:51%"></i></div><span>51%</span></div>
+        <div class="bar-row"><span>8/19</span><div class="bar open"><i style="width:50%"></i></div><span>50%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:26%"></i></div><span>26%</span></div>
+        <div class="bar-row"><span>8/20</span><div class="bar open"><i style="width:54%"></i></div><span>54%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:57%"></i></div><span>57%</span></div>
+        <div class="bar-row"><span>8/21</span><div class="bar open"><i style="width:71%"></i></div><span>71%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:10%"></i></div><span>10%</span></div>
+        <div class="bar-row"><span>8/22</span><div class="bar open"><i style="width:58%"></i></div><span>58%</span></div>
+        <div class="bar-row"><span>收盘</span><div class="bar end"><i style="width:30%"></i></div><span>30%</span></div>
+        <p class="note">8/21 收盘 10% 主因是潜后徒步，不是第三潜本身。</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>按天展开</h2>
+
+      <details class="card day-card highlight" open>
+        <summary>
+          <div class="day-top"><h3>8/19 · 深度峰值</h3><div class="max">46.3 m</div></div>
+          <div class="meta">
+            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">92 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">70</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">09:00 · 27.7 min<br><span>均深 17.7 m · 109/133</span></div><div class="right">34.9 m<small>TSS 21.4</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">10:40 · 30.0 min<br><span>均深 11.7 m · 101/124</span></div><div class="right">23.9 m<small>TSS 22.4</small></div></div>
+          <div class="dive hot"><div class="tag">D3</div><div class="main">12:48 · 34.6 min<br><span>均深 16.0 m · 104/133 · CNS 6%</span></div><div class="right">46.3 m<small>TSS 26.1</small></div></div>
+        </div>
+      </details>
+
+      <details class="card day-card danger">
+        <summary>
+          <div class="day-top"><h3>8/21 · 恢复崩掉</h3><div class="max">32.4 m</div></div>
+          <div class="meta">
+            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">103 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">10%</div><div class="ml">收盘资源</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">09:11 · 35.2 min<br><span>20.9 m · 99/126</span></div><div class="right">20.9 m<small>TSS 25.9</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">11:02 · 29.7 min<br><span>28.8 m · 98/117</span></div><div class="right">28.8 m<small>TSS 21.9</small></div></div>
+          <div class="dive hot"><div class="tag">D3</div><div class="main">13:17 · 38.5 min<br><span>32.4 m · 103/156</span></div><div class="right">32.4 m<small>TSS 29.2</small></div></div>
+          <p class="note">潜后 Trekking：均心率 156 / 最高 198 / TSS 119，把 Body Resources 砸到 10%。</p>
+        </div>
+      </details>
+
+      <details class="card day-card">
+        <summary>
+          <div class="day-top"><h3>8/16</h3><div class="max">29.6 m</div></div>
+          <div class="meta">
+            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">120 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">90</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">08:22 · 39.8 min<br><span>18.0 / 8.0 m</span></div><div class="right">18.0 m<small>TSS 31.3</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">10:00 · 36.5 min<br><span>14.1 m · 100/141</span></div><div class="right">14.1 m<small>TSS 27.3</small></div></div>
+          <div class="dive"><div class="tag">D3</div><div class="main">12:09 · 43.5 min<br><span>29.6 m · 94/133</span></div><div class="right">29.6 m<small>TSS 31.3</small></div></div>
+        </div>
+      </details>
+
+      <details class="card day-card">
+        <summary>
+          <div class="day-top"><h3>8/17 · 状态最好</h3><div class="max">32.2 m</div></div>
+          <div class="meta">
+            <div><div class="mv">79%</div><div class="ml">开潜资源</div></div>
+            <div><div class="mv">103 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">80</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">08:33 · 38.0 min<br><span>22.3 m · 101/122</span></div><div class="right">22.3 m<small>TSS 29.6</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">10:22 · 31.4 min<br><span>21.8 m · 109/132</span></div><div class="right">21.8 m<small>TSS 24.1</small></div></div>
+          <div class="dive hot"><div class="tag">D3</div><div class="main">12:30 · 34.0 min<br><span>32.2 m · 109/158</span></div><div class="right">32.2 m<small>TSS 26.6</small></div></div>
+        </div>
+      </details>
+
+      <details class="card day-card">
+        <summary>
+          <div class="day-top"><h3>8/18 · 主观最低</h3><div class="max">31.9 m</div></div>
+          <div class="meta">
+            <div><div class="mv">感觉 1–2</div><div class="ml">D2/D3</div></div>
+            <div><div class="mv">100 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">77</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">08:24 · 33.8 min<br><span>24.0 m · 104/128</span></div><div class="right">24.0 m<small>TSS 28.1</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">10:13 · 31.2 min<br><span>31.9 m · 95/115 · 感觉 2</span></div><div class="right">31.9 m<small>TSS 22.9</small></div></div>
+          <div class="dive"><div class="tag">D3</div><div class="main">12:13 · 35.2 min<br><span>29.9 m · 98/121 · 感觉 1</span></div><div class="right">29.9 m<small>TSS 25.7</small></div></div>
+        </div>
+      </details>
+
+      <details class="card day-card">
+        <summary>
+          <div class="day-top"><h3>8/20</h3><div class="max">37.5 m</div></div>
+          <div class="meta">
+            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">98 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">72</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive"><div class="tag">D1</div><div class="main">09:03 · 33.9 min<br><span>15.4 m · 99/121</span></div><div class="right">15.4 m<small>TSS 24.6</small></div></div>
+          <div class="dive"><div class="tag">D2</div><div class="main">10:53 · 26.0 min<br><span>12.7 m · 105/133</span></div><div class="right">12.7 m<small>TSS 20.6</small></div></div>
+          <div class="dive hot"><div class="tag">D3</div><div class="main">12:36 · 38.0 min<br><span>37.5 m · 95/115</span></div><div class="right">37.5 m<small>TSS 26.8</small></div></div>
+        </div>
+      </details>
+
+      <details class="card day-card">
+        <summary>
+          <div class="day-top"><h3>8/22 · 最后一天</h3><div class="max">39.2 m</div></div>
+          <div class="meta">
+            <div><div class="mv">115+</div><div class="ml">前两潜均心率</div></div>
+            <div><div class="mv">103 min</div><div class="ml">水下</div></div>
+            <div><div class="mv">81</div><div class="ml">TSS</div></div>
+          </div>
+          <div class="day-actions"><span class="chev"></span></div>
+        </summary>
+        <div>
+          <div class="dive hot"><div class="tag">D1</div><div class="main">09:17 · 40.7 min<br><span>27.2 m · 116/156 · PTE 2.3</span></div><div class="right">27.2 m<small>TSS 32.0</small></div></div>
+          <div class="dive hot"><div class="tag">D2</div><div class="main">11:06 · 28.0 min<br><span>39.2 m · 115/145</span></div><div class="right">39.2 m<small>TSS 22.7</small></div></div>
+          <div class="dive"><div class="tag">D3</div><div class="main">13:14 · 34.0 min<br><span>26.9 m · 102/131</span></div><div class="right">26.9 m<small>TSS 26.4</small></div></div>
+          <p class="note">这天最深在第二潜。当晚补睡 8h54m，质量 81。</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="section">
+      <h2>下次可以怎么改</h2>
+      <div class="card">
+        <p class="lead" style="margin:0">
+          最深潜放第一潜；40 m+ 那天别叠陆上高强度；表间隔尽量 ≥60 分钟；连潜中段盯睡眠 HRV，掉到 30 附近就该收深度。
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      Source: Suunto Ocean · 2026-08-16 至 08-22 · 已剔除 8/19 2.1 m 异常记录<br>
+      个人潜水数据页，链接可被任何人打开。非医疗或潜水安全认证意见。
+    </footer>
+  </div>
+</body>
+</html>
