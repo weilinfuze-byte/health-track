@@ -5,9 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#f4f7fb" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>7天潜水行程 · 8/16–8/22</title>
+  <title>7天潜水怎么样 · 8/16–8/22</title>
   <style>
-
     :root {
       --bg: #f4f7fb;
       --card: #ffffff;
@@ -40,7 +39,6 @@
       margin: 0 auto;
       padding: calc(12px + env(safe-area-inset-top)) var(--pad) calc(40px + env(safe-area-inset-bottom));
     }
-    .hero { padding: 8px 2px 18px; }
     .eyebrow {
       color: var(--accent);
       font-size: 12px;
@@ -55,17 +53,54 @@
       line-height: 1.15;
       letter-spacing: -0.03em;
     }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: var(--accent);
+    }
     .lead {
       margin: 12px 0 0;
       color: var(--muted);
       font-size: 14px;
-      line-height: 1.65;
+      line-height: 1.7;
+    }
+    .verdict {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #eff8ff 0%, #ffffff 70%);
+      border: 1px solid #b2ddff;
+      box-shadow: var(--shadow);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .verdict strong { color: var(--text); }
+    .part {
+      margin: 28px 0 8px;
+      padding-top: 8px;
+    }
+    .part-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--soft);
+      border: 1px solid #dbe7ff;
+      border-radius: 999px;
+      padding: 4px 10px;
+      margin-bottom: 10px;
     }
     .stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      margin: 18px 0;
+      margin: 14px 0;
     }
     .stat {
       background: var(--card);
@@ -88,28 +123,6 @@
     .stat.warn .v { color: var(--warn); }
     .stat.good .v { color: var(--good); }
     .stat.accent .v { color: var(--accent); }
-    .pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0 0 20px;
-    }
-    .pill {
-      font-size: 12px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: var(--soft);
-      color: var(--text);
-      border: 1px solid #dbe7ff;
-    }
-    .pill.ok { color: #067647; background: #dcfae6; border-color: #abefc6; }
-    .pill.warn { color: #b54708; background: #fef0c7; border-color: #fedf89; }
-    .section { margin: 22px 0 8px; }
-    .section h2 {
-      margin: 0 0 12px;
-      font-size: 18px;
-      letter-spacing: -0.02em;
-    }
     .card {
       background: var(--card);
       border: 1px solid var(--line);
@@ -118,27 +131,125 @@
       padding: 14px;
       margin-bottom: 10px;
     }
-    .card.highlight {
+    .card.hot {
       border-color: #fedf89;
       background: linear-gradient(180deg, #fffaf0 0%, #ffffff 55%);
+    }
+    .card.good {
+      border-color: #abefc6;
+      background: linear-gradient(180deg, #f3faf6 0%, #ffffff 55%);
     }
     .card.danger {
       border-color: #fecdca;
       background: linear-gradient(180deg, #fff5f5 0%, #ffffff 55%);
     }
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0 4px;
+    }
+    .toc a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #b2ddff;
+      background: #eff8ff;
+    }
+    .kv {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .kv div {
+      background: var(--card2);
+      border-radius: 12px;
+      padding: 10px;
+      border: 1px solid var(--line);
+    }
+    .kv .k { font-size: 11px; color: var(--muted); }
+    .kv .val { margin-top: 4px; font-size: 15px; font-weight: 700; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+    .table th, .table td {
+      padding: 8px 4px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    .table th { color: var(--muted); font-weight: 600; }
+    .table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .table tr.peak td { color: var(--warn); font-weight: 650; }
+    .find {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .find strong { color: var(--text); font-weight: 650; }
+    .claim {
+      margin: 0 0 8px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+    .evidence {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--card2);
+      border: 1px solid var(--line);
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .evidence strong { color: var(--text); }
+    .note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 10px 2px 0; }
+    .chart-wrap { width: 100%; overflow: hidden; margin-top: 8px; }
+    .chart-wrap svg { width: 100%; height: auto; display: block; }
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 8px; font-size: 11px; color: var(--muted);
+    }
+    .legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
+    .footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    details.day-card > summary { list-style: none; cursor: pointer; }
+    details.day-card > summary::-webkit-details-marker { display: none; }
+    details.day-card[open] .chev::after { content: "收起"; }
+    .chev::after {
+      content: "展开每天细节";
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .day-actions { margin-top: 10px; display: flex; justify-content: flex-end; }
     .day-top {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 10px;
     }
-    .day-top h3 { margin: 0; font-size: 16px; }
-    .day-top .max { color: var(--accent); font-weight: 700; font-size: 15px; }
+    .day-top h3 { margin: 0; font-size: 15px; color: var(--text); }
+    .day-top .max { color: var(--accent); font-weight: 700; font-size: 14px; }
     .meta {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-top: 12px;
+      margin-top: 10px;
     }
     .meta div {
       background: var(--card2);
@@ -147,31 +258,8 @@
       text-align: center;
       border: 1px solid var(--line);
     }
-    .meta .mv { font-size: 14px; font-weight: 700; }
+    .meta .mv { font-size: 13px; font-weight: 700; }
     .meta .ml { margin-top: 4px; font-size: 11px; color: var(--muted); }
-    .bar-row {
-      display: grid;
-      grid-template-columns: 42px 1fr 36px;
-      gap: 8px;
-      align-items: center;
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .bar {
-      height: 8px;
-      background: #eef2f6;
-      border-radius: 99px;
-      overflow: hidden;
-    }
-    .bar > i {
-      display: block;
-      height: 100%;
-      border-radius: 99px;
-      background: linear-gradient(90deg, #53b1fd, var(--accent));
-    }
-    .bar.open > i { background: linear-gradient(90deg, #7cd4fd, #2e90fa); }
-    .bar.end > i { background: linear-gradient(90deg, #fdb022, var(--warn)); }
     .dive {
       display: grid;
       grid-template-columns: 48px 1fr auto;
@@ -189,149 +277,290 @@
       display: block; margin-top: 2px; font-weight: 500; color: var(--muted); font-size: 11px;
     }
     .dive.hot .right { color: var(--warn); }
-    .note { color: var(--muted); font-size: 12px; line-height: 1.6; margin: 8px 2px 0; }
-    .phase {
-      padding: 14px;
-      border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--line);
-      box-shadow: var(--shadow);
-      margin-bottom: 10px;
-    }
-    .phase h3 { margin: 0 0 8px; font-size: 14px; color: var(--accent); }
-    .phase p { margin: 0; font-size: 13px; line-height: 1.65; color: var(--muted); }
-    .footer {
-      margin-top: 28px;
-      padding-top: 16px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.6;
-    }
-    details.day-card > summary { list-style: none; cursor: pointer; }
-    details.day-card > summary::-webkit-details-marker { display: none; }
-    details.day-card[open] .chev::after { content: "收起"; }
-    .chev::after {
-      content: "展开潜次";
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
-    }
-    .day-actions { margin-top: 12px; display: flex; justify-content: flex-end; }
-
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header class="hero">
-      <p class="eyebrow">SUUNTO · 空气 · 减压 40/85 · <a href="dive-trip-rich.html">深度分析</a></p>
-      <h1>7 天潜水行程</h1>
-      <p class="lead">
-        8/16–8/22 连续连潜。水下执行稳、氧负荷低；中段恢复下滑，8/21 潜后徒步把身体电量打穿。已剔除 2 m 异常浅潜。
-      </p>
-    </header>
-
-    <section class="stats">
-      <div class="stat accent"><div class="v">21</div><div class="l">有效潜次</div></div>
-      <div class="stat"><div class="v">12.0h</div><div class="l">水下总时长</div></div>
-      <div class="stat warn"><div class="v">46.3m</div><div class="l">最大深度</div></div>
-      <div class="stat good"><div class="v">547</div><div class="l">潜水运动负荷</div></div>
-    </section>
-
-    <div class="pills">
-      <span class="pill ok">心率大多 Zone 1</span>
-      <span class="pill ok">氧神经负荷 ≤ 6%</span>
-      <span class="pill warn">常把最深放最后</span>
-      <span class="pill warn">8/21 徒步打穿恢复</span>
+    <p class="eyebrow">SUUNTO · 空气 · 减压 40/85 · <a href="dive-trip-rich.html">附录数据</a></p>
+    <h1>这几天潜水怎么样</h1>
+    <p class="lead">
+      给不潜水的朋友看：2026 年 8 月 16–22 日，连续 7 天水肺潜水。下面先摆事实，再讲结论和依据。
+    </p>
+    <div class="verdict">
+      <strong>一句话：</strong>这是一次认真、强度不低的连续潜水旅行——水下约 12 小时、最深 46.3 米；水下控制稳、心率轻松、氧相关风险很低。真正偏弱的是恢复安排：常把最深潜放在当天最后，中段睡眠恢复变差后仍推深潜，还在潜后徒步把身体电量打穿，最后一天心率明显抬高。
     </div>
 
-    <section class="section">
+    <div class="toc">
+      <a href="#part1">一、基本数据</a>
+      <a href="#part2">二、洞察 + 论证</a>
+      <a href="#days">每天细节</a>
+    </div>
 
-      <h2>行程三段</h2>
-      <div class="phase">
-        <h3>前半 · 8/16–18</h3>
-        <p>每天三潜，最深约 30–32 m。8/17 补觉后下水前电量 79%，全程最好。8/18 主观掉到 1–2。</p>
-      </div>
-      <div class="phase">
-        <h3>中点 · 8/19</h3>
-        <p>下水前电量约 50%，完成全程最深 46.3 m（Air）。心率仍轻松，但氮暴露与恢复储备最紧。</p>
-      </div>
-      <div class="phase">
-        <h3>后半 · 8/20–22</h3>
-        <p>前两潜有收浅，第三潜仍常最深。8/21 徒步后电量 10%。8/22 均心率抬到 115+。</p>
-      </div>
-    </section>
+    <!-- ========== PART 1 ========== -->
+    <section class="part" id="part1">
+      <div class="part-label">PART 1</div>
+      <h2>基本数据</h2>
 
-    <section class="section">
-      <h2>每日最大深度</h2>
       <div class="card">
-        <div class="bar-row"><span>8/16</span><div class="bar"><i style="width:64%"></i></div><span>29.6</span></div>
-        <div class="bar-row"><span>8/17</span><div class="bar"><i style="width:70%"></i></div><span>32.2</span></div>
-        <div class="bar-row"><span>8/18</span><div class="bar"><i style="width:69%"></i></div><span>31.9</span></div>
-        <div class="bar-row"><span>8/19</span><div class="bar"><i style="width:100%"></i></div><span>46.3</span></div>
-        <div class="bar-row"><span>8/20</span><div class="bar"><i style="width:81%"></i></div><span>37.5</span></div>
-        <div class="bar-row"><span>8/21</span><div class="bar"><i style="width:70%"></i></div><span>32.4</span></div>
-        <div class="bar-row"><span>8/22</span><div class="bar"><i style="width:85%"></i></div><span>39.2</span></div>
-        <p class="note">条宽相对全程最深 46.3 m。</p>
+        <h3>发生了什么</h3>
+        <p class="find">
+          连续 <strong>7 天</strong>每天 3 次有效潜水（共 <strong>21 次</strong>；另有 1 次约 2 米、3 分钟的异常浅潜已剔除，不计入分析）。
+          气体是<strong>空气</strong>（不是高氧），手表减压设置偏保守。
+          同期还有：8/16 一次游泳；8/21 潜后一次高强度徒步（这是恢复崩掉的关键）。
+        </p>
       </div>
-    </section>
 
-    <section class="section">
-      <h2>下水前电量 vs 当天结束</h2>
+      <section class="stats">
+        <div class="stat accent"><div class="v">21</div><div class="l">有效潜水次数</div></div>
+        <div class="stat"><div class="v">12.0h</div><div class="l">水下总时长</div></div>
+        <div class="stat warn"><div class="v">46.3m</div><div class="l">全程最深（8/19）</div></div>
+        <div class="stat good"><div class="v">77min</div><div class="l">平均水面休息</div></div>
+        <div class="stat"><div class="v">547</div><div class="l">潜水运动负荷合计</div></div>
+        <div class="stat"><div class="v">≤6%</div><div class="l">氧神经负荷峰值</div></div>
+      </section>
+
       <div class="card">
-        <div class="bar-row"><span>8/16</span><div class="bar open"><i style="width:68%"></i></div><span>68%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:36%"></i></div><span>36%</span></div>
-        <div class="bar-row"><span>8/17</span><div class="bar open"><i style="width:79%"></i></div><span>79%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:42%"></i></div><span>42%</span></div>
-        <div class="bar-row"><span>8/18</span><div class="bar open"><i style="width:74%"></i></div><span>74%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:51%"></i></div><span>51%</span></div>
-        <div class="bar-row"><span>8/19</span><div class="bar open"><i style="width:50%"></i></div><span>50%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:26%"></i></div><span>26%</span></div>
-        <div class="bar-row"><span>8/20</span><div class="bar open"><i style="width:54%"></i></div><span>54%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:57%"></i></div><span>57%</span></div>
-        <div class="bar-row"><span>8/21</span><div class="bar open"><i style="width:71%"></i></div><span>71%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:10%"></i></div><span>10%</span></div>
-        <div class="bar-row"><span>8/22</span><div class="bar open"><i style="width:58%"></i></div><span>58%</span></div>
-        <div class="bar-row"><span>结束</span><div class="bar end"><i style="width:30%"></i></div><span>30%</span></div>
-        <p class="note">8/21 当天结束电量 10%，主因是潜后徒步，不是第三潜本身。</p>
+        <h3>按天一览</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th class="num">最深</th>
+              <th class="num">水下</th>
+              <th class="num">下水前电量</th>
+              <th class="num">结束电量</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>8/16</td><td class="num">29.6m</td><td class="num">120'</td><td class="num">68%</td><td class="num">36%</td></tr>
+            <tr><td>8/17 状态最好</td><td class="num">32.2m</td><td class="num">103'</td><td class="num">79%</td><td class="num">42%</td></tr>
+            <tr><td>8/18 感觉最差</td><td class="num">31.9m</td><td class="num">100'</td><td class="num">74%</td><td class="num">51%</td></tr>
+            <tr class="peak"><td>8/19 最深日</td><td class="num">46.3m</td><td class="num">92'</td><td class="num">50%</td><td class="num">26%</td></tr>
+            <tr><td>8/20</td><td class="num">37.5m</td><td class="num">98'</td><td class="num">54%</td><td class="num">57%</td></tr>
+            <tr class="peak"><td>8/21 潜+徒步</td><td class="num">32.4m</td><td class="num">103'</td><td class="num">71%</td><td class="num">10%</td></tr>
+            <tr><td>8/22 最后一天</td><td class="num">39.2m</td><td class="num">103'</td><td class="num">58%</td><td class="num">30%</td></tr>
+          </tbody>
+        </table>
+        <p class="note">身体电量：手表估的精力剩余。下水前 = 当天第一次下水时；结束 = 当天活动做完后。</p>
+      </div>
+
+      <div class="card">
+        <h3>每日最大深度（米）</h3>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 420 180" role="img" aria-label="每日最大深度折线">
+            <line x1="36" y1="148" x2="408" y2="148" stroke="#e5e7eb" stroke-width="1"/>
+            <line x1="36" y1="100" x2="408" y2="100" stroke="#eef2f6" stroke-width="1"/>
+            <line x1="36" y1="52" x2="408" y2="52" stroke="#eef2f6" stroke-width="1"/>
+            <text x="30" y="103.5" text-anchor="end" font-size="10" fill="#98a2b3">35</text>
+            <text x="30" y="55.5" text-anchor="end" font-size="10" fill="#98a2b3">45</text>
+            <text x="30" y="151.5" text-anchor="end" font-size="10" fill="#98a2b3">25</text>
+            <polygon fill="#2f80ed" opacity="0.12" points="36,130.1 98,117.1 160,118.6 222,46.6 284,90.6 346,116.1 408,82.1 408,148 36,148"/>
+            <polyline fill="none" stroke="#2f80ed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36,130.1 98,117.1 160,118.6 222,46.6 284,90.6 346,116.1 408,82.1"/>
+            <circle cx="36" cy="130.1" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="98" cy="117.1" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="160" cy="118.6" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="222" cy="46.6" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="284" cy="90.6" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="346" cy="116.1" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <circle cx="408" cy="82.1" r="3.2" fill="#fff" stroke="#2f80ed" stroke-width="2"/>
+            <text x="36" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text>
+            <text x="98" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text>
+            <text x="160" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text>
+            <text x="222" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text>
+            <text x="284" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text>
+            <text x="346" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text>
+            <text x="408" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text>
+          </svg>
+        </div>
+        <p class="note">中点尖峰是 8/19 的 46.3 m；后半仍偏深，不是「深完就浅」。</p>
+      </div>
+
+      <div class="card">
+        <h3>下水前 / 当天结束 · 身体电量（%）</h3>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 420 180" role="img" aria-label="身体电量折线">
+            <line x1="36" y1="148" x2="408" y2="148" stroke="#e5e7eb" stroke-width="1"/>
+            <line x1="36" y1="100" x2="408" y2="100" stroke="#eef2f6" stroke-width="1"/>
+            <line x1="36" y1="52" x2="408" y2="52" stroke="#eef2f6" stroke-width="1"/>
+            <text x="30" y="151.5" text-anchor="end" font-size="10" fill="#98a2b3">0</text>
+            <text x="30" y="103.5" text-anchor="end" font-size="10" fill="#98a2b3">30</text>
+            <text x="30" y="55.5" text-anchor="end" font-size="10" fill="#98a2b3">60</text>
+            <polyline fill="none" stroke="#12b76a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="36,48.5 98,32.4 160,39.7 222,74.9 284,69.0 346,44.1 408,63.1"/>
+            <polyline fill="none" stroke="#f79009" stroke-width="2.5" stroke-dasharray="5 4" stroke-linecap="round" stroke-linejoin="round" points="36,95.3 98,86.5 160,73.3 222,109.9 284,64.5 346,133.3 408,104.0"/>
+            <circle cx="36" cy="48.5" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="98" cy="32.4" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="160" cy="39.7" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="222" cy="74.9" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="284" cy="69.0" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="346" cy="44.1" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="408" cy="63.1" r="3.2" fill="#fff" stroke="#12b76a" stroke-width="2"/>
+            <circle cx="36" cy="95.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="98" cy="86.5" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="160" cy="73.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="222" cy="109.9" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="284" cy="64.5" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="346" cy="133.3" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <circle cx="408" cy="104.0" r="3.2" fill="#fff" stroke="#f79009" stroke-width="2"/>
+            <text x="36" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/16</text>
+            <text x="98" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/17</text>
+            <text x="160" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/18</text>
+            <text x="222" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/19</text>
+            <text x="284" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/20</text>
+            <text x="346" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/21</text>
+            <text x="408" y="172" text-anchor="middle" font-size="10" fill="#98a2b3">8/22</text>
+          </svg>
+        </div>
+        <div class="legend">
+          <span><i style="background:#12b76a"></i>下水前</span>
+          <span><i style="background:#f79009"></i>当天结束（虚线）</span>
+        </div>
+        <p class="note">8/21 结束电量掉到 10%（潜后徒步）；次日下水前只回 58%。</p>
+      </div>
+
+      <div class="card">
+        <h3>水面休息与安全相关数字</h3>
+        <div class="kv">
+          <div><div class="k">平均水面休息</div><div class="val">77 分钟</div></div>
+          <div><div class="k">短于 60 分钟</div><div class="val">1 / 14 次</div></div>
+          <div><div class="k">最短一次</div><div class="val">53 分钟</div></div>
+          <div><div class="k">日均心率区间</div><div class="val">97–111</div></div>
+        </div>
+        <p class="note">水面休息 = 两次潜水之间在船上/岸上歇多久。建议通常 ≥60 分钟。这次整体够用。</p>
       </div>
     </section>
 
-    <section class="section">
-      <h2>按天展开</h2>
+    <!-- ========== PART 2 ========== -->
+    <section class="part" id="part2">
+      <div class="part-label">PART 2</div>
+      <h2>洞察 + 论证</h2>
+      <p class="lead" style="margin:0 0 14px">先给判断，再用数据说明为什么这么说。</p>
 
-      <details class="card day-card highlight" open>
+      <div class="card good">
+        <p class="claim">1. 水下执行是稳的，不像在「硬扛到失控」</p>
+        <p class="find">
+          21 次潜水里，心率大多落在轻松区间；氧相关负荷全程极低（峰值约 6%）；减压设置偏保守。
+          即便做了 46.3 m 深潜，也没有出现「整潜都慌乱游动」的心率形态。
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>全程潜水运动负荷约 547，但氧神经负荷 ≤6%；绝大多数潜次均心率在 Zone 1；最深那天（8/19）日均心率仍约 105，说明深度上去了，水下节奏仍可控。
+        </div>
+      </div>
+
+      <div class="card hot">
+        <p class="claim">2. 最累的一天，不是潜得最深的那天</p>
+        <p class="find">
+          外人常以为「最深 = 最累」。数据里更吃紧的是 <strong>8/22</strong>（综合压力最高），其次才是最深日 8/19，再是 8/21（潜后徒步）。
+          8/22 最深只有 39.2 m，但日均心率抬到 <strong>111</strong>——疲劳已经进到执行层。
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>综合压力分（深度暴露 + 下水前电量低 + 心率抬升）：8/22=119，8/19=109，8/21=98。前六天日均心率 97–106，只有 8/22 破 110。
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="claim">3. 「深×时间」比单看最大深度，更能说明当天有多吃人</p>
+        <p class="find">
+          8/19 是<strong>单次尖峰</strong>（46.3 m × 约 35 分钟）。
+          但整天「平均深度 × 水下分钟」合计，最高反而是 <strong>8/21（1516）</strong> 和 <strong>8/22（1475）</strong>，高于 8/19（1395）。
+          后两天是<strong>全天铺开</strong>的累积暴露，不只是冲一次深。
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>日合计深度×时间：8/16 1257 → 8/17 1347 → 8/18 1384 → 8/19 1395 → 8/20 996 → 8/21 1516 → 8/22 1475。全程约 9369。
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="claim">4. 水面休息够了；真正偏激进的是「当天潜水顺序」</p>
+        <p class="find">
+          14 次水面休息平均 77 分钟，只有 1 次低于 60。所以「恢复不够」主要不是船歇太短。
+          短板是：7 天里有 <strong>5 天最深潜放在最后一潜</strong>；8/20 甚至是 15 → 13 → 37.5 m，越潜越深。
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>最深在第 3 潜：5/7 天；最深在第 2 潜：2/7 天。唯一短休息：8/16 第1→第2潜，53 分钟。其余 ≥63 分钟。
+        </div>
+      </div>
+
+      <div class="card danger">
+        <p class="claim">5. 睡眠恢复指数比主观感觉更早报警；深潜日却踩在低谷上</p>
+        <p class="find">
+          8/18 主观感觉已经很差（第 2、3 潜自评 1–2）。
+          当晚睡眠恢复指数掉到 <strong>27</strong>，次日（8/19）下水前电量只剩 <strong>50%</strong>——然后做了全程最深潜。
+          链路是：主观下滑 → 睡眠恢复谷底 → 深潜日电量不足。
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>前夜睡眠恢复指数 → 次日下水前电量：54→68%，43→79%，40→74%，<strong>27→50%</strong>，36→54%，41→71%。27/50% 是全行程最差搭配。
+        </div>
+      </div>
+
+      <div class="card danger">
+        <p class="claim">6. 把行程切成两半：量差不多，后半身体更「贵」</p>
+        <p class="find">
+          前半（8/16–18）与后半（8/20–22）水下分钟、深度×时间几乎一样。
+          差别在：后半心率更高，且出现结束电量 10%（8/21 潜后徒步：均心率 156 / 最高 198）。
+          <strong>量没变多，身体却更贵。</strong>
+        </p>
+        <div class="evidence">
+          <strong>依据：</strong>前半 vs 后半：水下 323' vs 304'；深度×时间 3988 vs 3986；均心率 101 vs 104（8/22 拉到 111）；运动负荷 247 vs 230。中间 8/19 是深度尖峰，把行程切成「还能扛」和「开始贵」。
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="claim">总评分（给人听的版本）</p>
+        <div class="kv" style="margin-bottom:10px">
+          <div><div class="k">水下执行</div><div class="val">A-</div></div>
+          <div><div class="k">恢复与安排</div><div class="val">C+</div></div>
+        </div>
+        <p class="find">
+          水下：控得住、氧风险低、没有把疲劳放大成慌乱。<br>
+          安排：最深常放最后；恢复指数谷底仍推 46 m；潜后徒步打穿电量后次日继续三潜。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>下次若再来，三条就够</h3>
+        <p class="find" style="margin-bottom:8px"><strong>1.</strong> 当天最深潜，固定放第一潜。</p>
+        <p class="find" style="margin-bottom:8px"><strong>2.</strong> 前夜睡眠恢复指数 &lt;35，或下水前电量 &lt;55%：深度收到 30 m 内。</p>
+        <p class="find"><strong>3.</strong> 当天最大深度 ≥40 m：当天不要再叠陆上高强度（徒步/长力量课）。</p>
+      </div>
+    </section>
+
+    <!-- ========== DAY DETAILS ========== -->
+    <section class="part" id="days">
+      <div class="part-label">APPENDIX</div>
+      <h2>每天细节（可展开）</h2>
+
+      <details class="card day-card hot" open>
         <summary>
           <div class="day-top"><h3>8/19 · 深度峰值</h3><div class="max">46.3 m</div></div>
           <div class="meta">
-            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">3 潜</div><div class="ml">次数</div></div>
             <div><div class="mv">92 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">70</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">50%→26%</div><div class="ml">电量</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">09:00 · 27.7 min<br><span>均深 17.7 m · 109/133</span></div><div class="right">34.9 m<small>负荷 21.4</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">10:40 · 30.0 min<br><span>均深 11.7 m · 101/124</span></div><div class="right">23.9 m<small>负荷 22.4</small></div></div>
-          <div class="dive hot"><div class="tag">D3</div><div class="main">12:48 · 34.6 min<br><span>均深 16.0 m · 104/133 · 氧神经负荷 6%</span></div><div class="right">46.3 m<small>负荷 26.1</small></div></div>
+          <div class="dive"><div class="tag">第1</div><div class="main">09:00 · 27.7 min<br><span>均深 17.7 m · 心率 109/133</span></div><div class="right">34.9 m<small>负荷 21.4</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">10:40 · 30.0 min<br><span>均深 11.7 m · 心率 101/124</span></div><div class="right">23.9 m<small>负荷 22.4</small></div></div>
+          <div class="dive hot"><div class="tag">第3</div><div class="main">12:48 · 34.6 min<br><span>均深 16.0 m · 心率 104/133</span></div><div class="right">46.3 m<small>负荷 26.1</small></div></div>
         </div>
       </details>
 
       <details class="card day-card danger">
         <summary>
-          <div class="day-top"><h3>8/21 · 恢复崩掉</h3><div class="max">32.4 m</div></div>
+          <div class="day-top"><h3>8/21 · 潜后徒步打穿</h3><div class="max">32.4 m</div></div>
           <div class="meta">
-            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
+            <div><div class="mv">3 潜</div><div class="ml">次数</div></div>
             <div><div class="mv">103 min</div><div class="ml">水下</div></div>
             <div><div class="mv">10%</div><div class="ml">结束电量</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">09:11 · 35.2 min<br><span>20.9 m · 99/126</span></div><div class="right">20.9 m<small>负荷 25.9</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">11:02 · 29.7 min<br><span>28.8 m · 98/117</span></div><div class="right">28.8 m<small>负荷 21.9</small></div></div>
-          <div class="dive hot"><div class="tag">D3</div><div class="main">13:17 · 38.5 min<br><span>32.4 m · 103/156</span></div><div class="right">32.4 m<small>负荷 29.2</small></div></div>
-          <p class="note">潜后 Trekking：均心率 156 / 最高 198 / 运动负荷 119，把身体电量砸到 10%。</p>
+          <div class="dive"><div class="tag">第1</div><div class="main">09:11 · 35.2 min<br><span>20.9 m · 99/126</span></div><div class="right">20.9 m<small>负荷 25.9</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">11:02 · 29.7 min<br><span>28.8 m · 98/117</span></div><div class="right">28.8 m<small>负荷 21.9</small></div></div>
+          <div class="dive hot"><div class="tag">第3</div><div class="main">13:17 · 38.5 min<br><span>32.4 m · 103/156</span></div><div class="right">32.4 m<small>负荷 29.2</small></div></div>
+          <p class="note">潜后徒步：均心率 156 / 最高 198 / 运动负荷 119 → 身体电量到 10%。</p>
         </div>
       </details>
 
@@ -339,33 +568,33 @@
         <summary>
           <div class="day-top"><h3>8/16</h3><div class="max">29.6 m</div></div>
           <div class="meta">
-            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
             <div><div class="mv">120 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">90</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">68%→36%</div><div class="ml">电量</div></div>
+            <div><div class="mv">90</div><div class="ml">负荷</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">08:22 · 39.8 min<br><span>18.0 / 8.0 m</span></div><div class="right">18.0 m<small>负荷 31.3</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">10:00 · 36.5 min<br><span>14.1 m · 100/141</span></div><div class="right">14.1 m<small>负荷 27.3</small></div></div>
-          <div class="dive"><div class="tag">D3</div><div class="main">12:09 · 43.5 min<br><span>29.6 m · 94/133</span></div><div class="right">29.6 m<small>负荷 31.3</small></div></div>
+          <div class="dive"><div class="tag">第1</div><div class="main">08:22 · 39.8 min<br><span>18.0 / 8.0 m</span></div><div class="right">18.0 m<small>负荷 31.3</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">10:00 · 36.5 min<br><span>14.1 m · 100/141</span></div><div class="right">14.1 m<small>负荷 27.3</small></div></div>
+          <div class="dive"><div class="tag">第3</div><div class="main">12:09 · 43.5 min<br><span>29.6 m · 94/133</span></div><div class="right">29.6 m<small>负荷 31.3</small></div></div>
         </div>
       </details>
 
-      <details class="card day-card">
+      <details class="card day-card good">
         <summary>
           <div class="day-top"><h3>8/17 · 状态最好</h3><div class="max">32.2 m</div></div>
           <div class="meta">
             <div><div class="mv">79%</div><div class="ml">下水前电量</div></div>
             <div><div class="mv">103 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">80</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">80</div><div class="ml">负荷</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">08:33 · 38.0 min<br><span>22.3 m · 101/122</span></div><div class="right">22.3 m<small>负荷 29.6</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">10:22 · 31.4 min<br><span>21.8 m · 109/132</span></div><div class="right">21.8 m<small>负荷 24.1</small></div></div>
-          <div class="dive hot"><div class="tag">D3</div><div class="main">12:30 · 34.0 min<br><span>32.2 m · 109/158</span></div><div class="right">32.2 m<small>负荷 26.6</small></div></div>
+          <div class="dive"><div class="tag">第1</div><div class="main">08:33 · 38.0 min<br><span>22.3 m · 101/122</span></div><div class="right">22.3 m<small>负荷 29.6</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">10:22 · 31.4 min<br><span>21.8 m · 109/132</span></div><div class="right">21.8 m<small>负荷 24.1</small></div></div>
+          <div class="dive hot"><div class="tag">第3</div><div class="main">12:30 · 34.0 min<br><span>32.2 m · 109/158</span></div><div class="right">32.2 m<small>负荷 26.6</small></div></div>
         </div>
       </details>
 
@@ -373,16 +602,16 @@
         <summary>
           <div class="day-top"><h3>8/18 · 主观最低</h3><div class="max">31.9 m</div></div>
           <div class="meta">
-            <div><div class="mv">感觉 1–2</div><div class="ml">D2/D3</div></div>
+            <div><div class="mv">感觉 1–2</div><div class="ml">第2/3潜</div></div>
             <div><div class="mv">100 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">77</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">77</div><div class="ml">负荷</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">08:24 · 33.8 min<br><span>24.0 m · 104/128</span></div><div class="right">24.0 m<small>负荷 28.1</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">10:13 · 31.2 min<br><span>31.9 m · 95/115 · 感觉 2</span></div><div class="right">31.9 m<small>负荷 22.9</small></div></div>
-          <div class="dive"><div class="tag">D3</div><div class="main">12:13 · 35.2 min<br><span>29.9 m · 98/121 · 感觉 1</span></div><div class="right">29.9 m<small>负荷 25.7</small></div></div>
+          <div class="dive"><div class="tag">第1</div><div class="main">08:24 · 33.8 min<br><span>24.0 m · 104/128</span></div><div class="right">24.0 m<small>负荷 28.1</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">10:13 · 31.2 min<br><span>31.9 m · 95/115 · 感觉 2</span></div><div class="right">31.9 m<small>负荷 22.9</small></div></div>
+          <div class="dive"><div class="tag">第3</div><div class="main">12:13 · 35.2 min<br><span>29.9 m · 98/121 · 感觉 1</span></div><div class="right">29.9 m<small>负荷 25.7</small></div></div>
         </div>
       </details>
 
@@ -390,16 +619,16 @@
         <summary>
           <div class="day-top"><h3>8/20</h3><div class="max">37.5 m</div></div>
           <div class="meta">
-            <div><div class="mv">3 潜</div><div class="ml">潜次</div></div>
             <div><div class="mv">98 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">72</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">54%→57%</div><div class="ml">电量</div></div>
+            <div><div class="mv">72</div><div class="ml">负荷</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive"><div class="tag">D1</div><div class="main">09:03 · 33.9 min<br><span>15.4 m · 99/121</span></div><div class="right">15.4 m<small>负荷 24.6</small></div></div>
-          <div class="dive"><div class="tag">D2</div><div class="main">10:53 · 26.0 min<br><span>12.7 m · 105/133</span></div><div class="right">12.7 m<small>负荷 20.6</small></div></div>
-          <div class="dive hot"><div class="tag">D3</div><div class="main">12:36 · 38.0 min<br><span>37.5 m · 95/115</span></div><div class="right">37.5 m<small>负荷 26.8</small></div></div>
+          <div class="dive"><div class="tag">第1</div><div class="main">09:03 · 33.9 min<br><span>15.4 m · 99/121</span></div><div class="right">15.4 m<small>负荷 24.6</small></div></div>
+          <div class="dive"><div class="tag">第2</div><div class="main">10:53 · 26.0 min<br><span>12.7 m · 105/133</span></div><div class="right">12.7 m<small>负荷 20.6</small></div></div>
+          <div class="dive hot"><div class="tag">第3</div><div class="main">12:36 · 38.0 min<br><span>37.5 m · 95/115</span></div><div class="right">37.5 m<small>负荷 26.8</small></div></div>
         </div>
       </details>
 
@@ -409,31 +638,26 @@
           <div class="meta">
             <div><div class="mv">115+</div><div class="ml">前两潜均心率</div></div>
             <div><div class="mv">103 min</div><div class="ml">水下</div></div>
-            <div><div class="mv">81</div><div class="ml">运动负荷</div></div>
+            <div><div class="mv">81</div><div class="ml">负荷</div></div>
           </div>
           <div class="day-actions"><span class="chev"></span></div>
         </summary>
         <div>
-          <div class="dive hot"><div class="tag">D1</div><div class="main">09:17 · 40.7 min<br><span>27.2 m · 116/156 · PTE 2.3</span></div><div class="right">27.2 m<small>负荷 32.0</small></div></div>
-          <div class="dive hot"><div class="tag">D2</div><div class="main">11:06 · 28.0 min<br><span>39.2 m · 115/145</span></div><div class="right">39.2 m<small>负荷 22.7</small></div></div>
-          <div class="dive"><div class="tag">D3</div><div class="main">13:14 · 34.0 min<br><span>26.9 m · 102/131</span></div><div class="right">26.9 m<small>负荷 26.4</small></div></div>
-          <p class="note">这天最深在第二潜。当晚补睡 8h54m，质量 81。</p>
+          <div class="dive hot"><div class="tag">第1</div><div class="main">09:17 · 40.7 min<br><span>27.2 m · 116/156</span></div><div class="right">27.2 m<small>负荷 32.0</small></div></div>
+          <div class="dive hot"><div class="tag">第2</div><div class="main">11:06 · 28.0 min<br><span>39.2 m · 115/145</span></div><div class="right">39.2 m<small>负荷 22.7</small></div></div>
+          <div class="dive"><div class="tag">第3</div><div class="main">13:14 · 34.0 min<br><span>26.9 m · 102/131</span></div><div class="right">26.9 m<small>负荷 26.4</small></div></div>
+          <p class="note">这天最深在第二潜。当晚补睡约 8h54m，质量分 81。</p>
         </div>
       </details>
     </section>
 
-    <section class="section">
-      <h2>下次可以怎么改</h2>
-      <div class="card">
-        <p class="lead" style="margin:0">
-          最深潜放第一潜；40 m+ 那天别叠陆上高强度；两次潜水之间水面休息尽量 ≥60 分钟；连潜中段盯睡眠恢复指数，掉到 30 附近就该收深度。
-        </p>
-      </div>
-    </section>
+    <p class="note">
+      <a href="dive-trip-rich.html" style="color:#2f80ed">看更多图表与半程对比 →</a>
+    </p>
 
     <footer class="footer">
-      Source: Suunto Ocean · 2026-08-16 至 08-22 · 已剔除 8/19 2.1 m 异常记录<br>
-      个人潜水数据页，链接可被任何人打开。非医疗或潜水安全认证意见。
+      数据来源：Suunto Ocean · 2026-08-16 至 08-22 · 已剔除 8/19 约 2 m 异常浅潜<br>
+      个人数据页，链接可被打开。非医疗或潜水安全认证意见。
     </footer>
   </div>
 </body>
